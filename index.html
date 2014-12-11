@@ -1,0 +1,28 @@
+<html>
+<body>
+  <div id="palette">
+    <svg viewBox="0 0 100 100" width="80%" height="80%" style="background: #333" v-el="palette">
+      <g v-repeat="bamboos" v-component="bamboo">
+        <image  
+          xlink:href="bb.png" 
+          v-attr="x: x, y: y, width: w, height:h"
+          v-on="mousedown: onMouseDown, mouseup: onMouseUp, mousemove : onMouseMove"/>
+        <!--animateTransform attributeType="xml"
+          attributeName="transform"
+          type="rotate"
+          from="0 0 0"
+          to="360 0 0"
+          dur="4s"
+          repeatCount="indefinite"/-->  
+      </g>
+    </svg>
+  </div>
+  <template id="bamboo">
+    <image >
+  </template>
+<script src="build.js"></script>
+<script>
+
+</script>
+</body>
+</html>
