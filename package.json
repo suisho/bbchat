@@ -6,7 +6,7 @@
   "scripts": {
     "start": "watchify index.js -o build.js",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "push:gh-pages": "git push origin HEAD:gh-pages"
+    "gh-pages": "git push origin HEAD:gh-pages"
   },
   "author": "",
   "license": "ISC",
