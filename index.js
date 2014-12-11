@@ -1,6 +1,9 @@
-var 
-var Parse = require("parse")
-Parse.initialize(appKey, jsKey)
+var Firebase = require("firebase")
+//Parse.initialize(appKey, jsKey)
+
+Firebase.authWithOAuthRedirect("github", function(error) { 
+})
+
 var Vue = require("Vue")
 
 Vue.component("bamboo",{
