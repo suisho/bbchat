@@ -1,56 +1,22 @@
 var Firebase = require("firebase")
-//Parse.initialize(appKey, jsKey)
-
-Firebase.authWithOAuthRedirect("github", function(error) { 
-})
-
 var Vue = require("Vue")
-
-Vue.component("bamboo",{
-  //template : "#bamboo",
-  data : {
-    x : 10, y:10, h : 50, w: 50,
-    enableMove : false
-  },
+var bbface = require("./lib/bbface")
+var ref = new Firebase("http://okanokanokano.firebaseio.com")
   
-  methods : {
-    onMouseDown : function(e){
-      this.$data.enableMove = true
-//      console.log(e)
-    },
-    onMouseUp : function(e){
-      this.$data.enableMove = false
-      console.log(this.$$.palette)
-      //      console.log(e)
-    },
-    
-    onMouseMove : function(e){
-      if(!this.$data.enableMove){
-        return
-      }
-      this.$data.x = e.x - this.$data.w/2
-      this.$data.y = e.y - this.$data.h/2      
-    }
+ref.onAuth(function(authData){
+  if(authData === null){
+    ref.authWithOAuthPopup("github", function(error) { 
+    })
+    return 
   }
+  console.log("authed")
+  var key = "last_logged_in"
+  var time = (new Date()).toString()
+  ref.once("value", function(v){
+    console.log(v.val().last_logged_in)
+  })
+  
+  ref.child(key).set(time)
+  bbface(ref)
 })
-function randomBamboo(){
-  return {
-    x :Math.random() * 100,
-    y :Math.random() * 100,
-    h :Math.random() * 100,
-    w :Math.random() * 100,
-  }
-}
-var app = new Vue({
-  data : {    
-    bamboos : [
-      randomBamboo(),
-    ]
-  },
-  created : function(){
-  }
-})
-app.$mount("#palette")
-setInterval(function(){
-  app.bamboos.push(randomBamboo())
-}, 1000)
+

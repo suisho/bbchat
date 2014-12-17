@@ -4,7 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "watchify index.js -o build.js",
+    "start": "beefy index.js:dist/build.js",
+    "dist": "browserify index.js -o build.js -v",
     "test": "echo \"Error: no test specified\" && exit 1",
     "gh-pages": "git push origin HEAD:gh-pages"
   },
