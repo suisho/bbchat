@@ -16,15 +16,23 @@ var loginConsole = new Vue({
         console.log(this.statusMessages)
       }
     }
+  },
+  methods:{
+    signOut : function(){
+      ref.unauth()
+    },
+    signIn : function(){
+      ref.authWithOAuthRedirect("github", function(error) { 
+      })
+    }
   }
 })
 loginConsole.$mount("#login-console")
-bbface(ref)
 
+bbface(ref)
 ref.onAuth(function(authData){
   if(authData === null){
     loginConsole.status = "Not Login"
-    console.log("login")
     return 
   }
   loginConsole.status = "Login"

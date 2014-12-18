@@ -2,10 +2,11 @@
 <body>
   <div id="login-console">
     <span v-text="status"></span>
+    <button v-on="click:signIn" >sing in</button>
+    <button v-on="click:signOut" >sing out</button>
   </div>
     
   <div id="palette">
-    
     <svg viewBox="0 0 100 100" width="80%" height="80%" style="background: #333" v-el="palette">
       <g v-repeat="bamboos" v-component="bamboo">
         <image
@@ -19,7 +20,7 @@
           to="360 0 0"
           dur="4s"
           repeatCount="indefinite"/-->  
-        </g>
+      </g>
     </svg>
   </div>
   <template id="bamboo">
