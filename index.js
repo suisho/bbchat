@@ -2,14 +2,32 @@ var Firebase = require("firebase")
 var Vue = require("Vue")
 var bbface = require("./lib/bbface")
 var ref = new Firebase("http://okanokanokano.firebaseio.com")
-  
+var loginConsole = new Vue({
+  data :{
+    statusMessages : ["Initialize"],
+  },
+  computed : {
+    status : {
+      get : function() {
+        return this.statusMessages[0]
+      },
+      set : function(msg) {
+        this.statusMessages.unshift(msg)
+        console.log(this.statusMessages)
+      }
+    }
+  }
+})
+loginConsole.$mount("#login-console")
+bbface(ref)
+
 ref.onAuth(function(authData){
   if(authData === null){
-    ref.authWithOAuthPopup("github", function(error) { 
-    })
+    loginConsole.status = "Not Login"
+    console.log("login")
     return 
   }
-  console.log("authed")
+  loginConsole.status = "Login"
   var key = "last_logged_in"
   var time = (new Date()).toString()
   ref.once("value", function(v){
@@ -17,6 +35,5 @@ ref.onAuth(function(authData){
   })
   
   ref.child(key).set(time)
-  bbface(ref)
 })
 

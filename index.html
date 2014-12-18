@@ -1,9 +1,14 @@
 <html>
 <body>
+  <div id="login-console">
+    <span v-text="status"></span>
+  </div>
+    
   <div id="palette">
+    
     <svg viewBox="0 0 100 100" width="80%" height="80%" style="background: #333" v-el="palette">
       <g v-repeat="bamboos" v-component="bamboo">
-        <image  
+        <image
           xlink:href="bb.png" 
           v-attr="x: x, y: y, width: w, height:h"
           v-on="mousedown: onMouseDown, mouseup: onMouseUp, mousemove : onMouseMove"/>
@@ -14,11 +19,15 @@
           to="360 0 0"
           dur="4s"
           repeatCount="indefinite"/-->  
-      </g>
+        </g>
     </svg>
   </div>
   <template id="bamboo">
-    <image >
+    <g>
+      <image xlink:href="bb.png" 
+        v-attr="x: x, y: y, width: w, height:h"
+        v-on="mousedown: onMouseDown, mouseup: onMouseUp, mousemove : onMouseMove"></image>
+    </g>
   </template>
 <script src="dist/build.js"></script>
 <script>
